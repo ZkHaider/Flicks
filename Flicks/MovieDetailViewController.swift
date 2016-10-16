@@ -9,11 +9,32 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
-
+    
+    /***********************************
+     * Views
+     ***********************************/
+    
+    @IBOutlet weak var backdropImage: UIImageView!
+    
+    /***********************************
+     * Variables
+     ***********************************/
+    
+    var movie: Movie!
+    
+    /***********************************
+     * LifeCycle Methods
+     ***********************************/
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Go ahead and load image
+        if movie.posterPath != nil {
+            if let backdropPath = movie.posterPath {
+                backdropImage.setImageFromURLString(urlString: backdropPath)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

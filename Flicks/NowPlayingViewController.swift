@@ -110,9 +110,12 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        // Grab movie
+        let movie = nowPlayingMovies[indexPath.row]
+        
         // Go ahead and instantiate view controller
         let movieDetailViewController = storyboard?.instantiateViewController(withIdentifier: "movieDetailViewController") as! MovieDetailViewController
-        
+        movieDetailViewController.movie = movie;
         self.navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
 

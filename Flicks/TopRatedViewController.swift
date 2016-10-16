@@ -96,9 +96,12 @@ class TopRatedViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        // Grab movie
+        let movie = topRatedMovies[indexPath.row]
+        
         // Go ahead and instantiate view controller
         let movieDetailViewController = storyboard?.instantiateViewController(withIdentifier: "movieDetailViewController") as! MovieDetailViewController
-        
+        movieDetailViewController.movie = movie
         self.navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
     

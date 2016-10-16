@@ -8,7 +8,7 @@
 
 import SystemConfiguration
 
-let debugging: Bool = true
+let debugging: Bool = false
 
 public class Connection {
         

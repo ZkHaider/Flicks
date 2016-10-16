@@ -66,16 +66,4 @@ class MovieDetailViewController: UIViewController, UIScrollViewDelegate {
      * ScrollView Methods
      ***********************************/
 
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        print("began dragging")
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        let offsetY = scrollView.contentOffset.y
-        let percentage = offsetY / scrollView.contentSize.height
-        
-        print("Percentage: " + String(describing: percentage))
-    }
-
 }

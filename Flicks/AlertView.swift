@@ -187,7 +187,7 @@ class AlertView: UIView {
         self.isShowing = true
         
         if (isShowing) {
-            
+            animateIn()
         }
     }
     
@@ -213,7 +213,7 @@ class AlertView: UIView {
         
         UIView.animateKeyframes(
             withDuration: TimeInterval(alertViewAnimationDuration),
-            delay: 0,
+            delay: 0.6,
             options: UIViewKeyframeAnimationOptions.calculationModeCubic,
             animations: {
                 var frame = self.frame

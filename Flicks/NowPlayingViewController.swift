@@ -164,6 +164,8 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
             self.searchActive = false
         } else {
             
+            self.searchActive = true
+            
             filteredMovies = nowPlayingMovies.filter({(movie: Movie) -> Bool in
              
                 // FIX
@@ -174,6 +176,8 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
                 }
             })
         }
+        
+        self.nowPlayingTableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

@@ -37,6 +37,9 @@ class MovieDetailViewController: UIViewController {
             }
         }
         
+        // Add a corner radius to scrollview
+        self.overviewScroll.layer.cornerRadius = 2
+        
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds

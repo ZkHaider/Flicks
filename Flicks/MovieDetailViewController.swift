@@ -15,6 +15,7 @@ class MovieDetailViewController: UIViewController {
      ***********************************/
     
     @IBOutlet weak var backdropImage: UIImageView!
+    @IBOutlet weak var overviewScroll: UIScrollView!
     
     /***********************************
      * Variables
@@ -35,6 +36,18 @@ class MovieDetailViewController: UIViewController {
                 backdropImage.setImageFromURLString(urlString: backdropPath)
             }
         }
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        overviewScroll.addSubview(blurEffectView)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        // Set offset to scrollview from top
+        self.overviewScroll.setContentOffset(CGPoint(x: 0, y: -350), animated: true)
+        self.overviewScroll.layoutIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {

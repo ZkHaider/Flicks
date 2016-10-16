@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+class MovieDetailViewController: UIViewController, UIScrollViewDelegate {
     
     /***********************************
      * Views
@@ -40,14 +40,18 @@ class MovieDetailViewController: UIViewController {
         // Add a corner radius to scrollview
         self.overviewScroll.layer.cornerRadius = 4
         
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
-        overviewScroll.addSubview(blurEffectView)
+        // Set the scroll view delegate on the scrollview
+        overviewScroll.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = overviewScroll.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        overviewScroll.sendSubview(toBack: blurEffectView)
+        
         // Set offset to scrollview from top
         self.overviewScroll.setContentOffset(CGPoint(x: 0, y: -350), animated: true)
         self.overviewScroll.layoutIfNeeded()
@@ -58,15 +62,20 @@ class MovieDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /***********************************
+     * ScrollView Methods
+     ***********************************/
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("began dragging")
     }
-    */
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let offsetY = scrollView.contentOffset.y
+        let percentage = offsetY / scrollView.contentSize.height
+        
+        print("Percentage: " + String(describing: percentage))
+    }
 
 }

@@ -152,6 +152,16 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func pullToRefresh() {
+        
+        if Connection.isConnectedToNetwork() {
+            loadCurrentMovies()
+        } else {
+            
+            // Show a drop down error
+            let alert = AlertView.init(message: "Your internet connection is having issues", style: AlertViewStyle.Yield)
+            alert.show()
+        }
+
         loadCurrentMovies()
     }
     

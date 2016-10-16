@@ -110,7 +110,15 @@ class TopRatedViewController: UIViewController, UITableViewDataSource, UITableVi
      ***********************************/
     
     func pullToRefresh() {
-        loadTopMovies()
+        
+        if Connection.isConnectedToNetwork() {
+            loadTopMovies()
+        } else {
+            
+            // Show a drop down error
+            let alert = AlertView.init(message: "Your internet connection is having issues", style: AlertViewStyle.Yield)
+            alert.show()
+        }
     }
     
     func loadTopMovies() {

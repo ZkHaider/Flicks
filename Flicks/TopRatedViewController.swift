@@ -94,6 +94,14 @@ class TopRatedViewController: UIViewController, UITableViewDataSource, UITableVi
         return movieCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Go ahead and instantiate view controller
+        let movieDetailViewController = storyboard?.instantiateViewController(withIdentifier: "movieDetailViewController") as! MovieDetailViewController
+        
+        self.navigationController?.pushViewController(movieDetailViewController, animated: true)
+    }
+    
     /***********************************
      * Accessory Methods
      ***********************************/

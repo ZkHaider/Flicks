@@ -23,6 +23,8 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
      ***********************************/
 
     var nowPlayingMovies: [Movie] = []
+    var filteredMovies: [Movie] = []
+    var searchActive: Bool = false
     
     let refreshControl: UIRefreshControl = UIRefreshControl()
     
@@ -90,6 +92,9 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
      ***********************************/
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchActive {
+            return filteredMovies.count
+        }
         return nowPlayingMovies.count
     }
     
@@ -99,29 +104,77 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
         let movieCell = tableView.dequeueReusableCell(withIdentifier: "nowPlayingMovieCell", for: indexPath) as! NowPlayingMovieTableViewCell
         
         // We have the movie cell go ahead and cell our movie object
-        let movie = nowPlayingMovies[indexPath.row]
+        if !searchActive {
+            
+            let movie = nowPlayingMovies[indexPath.row]
                 
-        // Set our movie
-        movieCell.setMovie(movie: movie)
+            // Set our movie
+            movieCell.setMovie(movie: movie)
         
-        // Return our cell
-        return movieCell
+            // Return our cell
+            return movieCell
+            
+        } else {
+            
+            let filteredMovie = filteredMovies[indexPath.row]
+            
+            // Set our movie
+            movieCell.setMovie(movie: filteredMovie)
+            
+            // Return our cell
+            return movieCell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // Grab movie
-        let movie = nowPlayingMovies[indexPath.row]
-        
         // Go ahead and instantiate view controller
         let movieDetailViewController = storyboard?.instantiateViewController(withIdentifier: "movieDetailViewController") as! MovieDetailViewController
-        movieDetailViewController.movie = movie;
+        
+        if searchActive {
+            
+            let filteredMovie = filteredMovies[indexPath.row]
+            movieDetailViewController.movie = filteredMovie
+            
+        } else {
+         
+            let movie = nowPlayingMovies[indexPath.row]
+            movieDetailViewController.movie = movie
+        }
+        
         self.navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
 
     /***********************************
      * SearchBar Methods
      ***********************************/
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchActive = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.searchActive = false
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty {
+            filteredMovies = nowPlayingMovies
+            self.searchActive = false
+        } else {
+            
+            filteredMovies = nowPlayingMovies.filter({(movie: Movie) -> Bool in
+             
+                // FIX
+                if (movie.title?.contains(searchText))! {
+                    return true
+                } else {
+                    return false
+                }
+            })
+        }
+    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -170,6 +223,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UITable
         // Go ahead and load the now playing movies
         MovieAPI.getNowPlayingMovies(completion: { nowPlaying in
             self.nowPlayingMovies = nowPlaying.results
+            self.filteredMovies = nowPlaying.results
             
             DispatchQueue.main.async {
                 

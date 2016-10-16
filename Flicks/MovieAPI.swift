@@ -10,7 +10,7 @@ import Foundation
 import Mapper
 
 let baseUrl = "https://api.themoviedb.org/3"
-let apiKey = "7d006fc1373420c29ede8c47fb8163c3"
+let apiKey = "REPLACE WITH YOUR API_KEY"
 
 struct MovieAPI {
     

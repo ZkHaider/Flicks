@@ -1,0 +1,18 @@
+PODS:
+  - KFSwiftImageLoader (3.0.0)
+  - KRProgressHUD (2.0.0)
+  - ModelMapper (5.0.0)
+
+DEPENDENCIES:
+  - KFSwiftImageLoader
+  - KRProgressHUD
+  - ModelMapper
+
+SPEC CHECKSUMS:
+  KFSwiftImageLoader: c4656d614329480308b190c2b6f15015a4018ffc
+  KRProgressHUD: fa77b02194e532579579d5f0953282dab1c961c5
+  ModelMapper: 89ced1f51ec6360e93f6889d08c818d4cad526a3
+
+PODFILE CHECKSUM: 6336ac97068264f18025cbc045f3af28a3da4dc1
+
+COCOAPODS: 1.0.1

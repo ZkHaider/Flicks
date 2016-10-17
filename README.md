@@ -26,6 +26,3 @@ The following **optional** features are implemented:
 Walkthrough of implemented user stories:
 
 ![Walkthrough](http://i.giphy.com/l4pMaSeEAPjDYWSsg.gif)
-
-
-<a href="http://i.giphy.com/l4pMaSeEAPjDYWSsg.gif"><img src="http://i.giphy.com/l4pMaSeEAPjDYWSsg.gif"/></a>

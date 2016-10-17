@@ -25,4 +25,4 @@ The following **optional** features are implemented:
 
 Walkthrough of implemented user stories:
 
-<a href="http://i.giphy.com/l4pMbp9zDU9K0APEA.gif"><img src="http://i.giphy.com/l4pMbp9zDU9K0APEA.gif"/></a>
+<a href="http://gph.is/2dZIkWq"><img src="http://i.giphy.com/l4pMaSeEAPjDYWSsg.gif"/></a>
